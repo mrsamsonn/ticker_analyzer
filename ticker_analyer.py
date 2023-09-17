@@ -1,18 +1,3 @@
-from tvDatafeed import TvDatafeed, Interval
-import matplotlib.pyplot as plt
+from yahoo_fin.stock_info import *
 
-#tv = TvDatafeed()
-
-username = 'ticker_analyzer1'
-password = 'tickeranalyzer1'
-
-tv = TvDatafeed(username, password)
-
-nifty_index_data = tv.get_hist(symbol='NIFTY',exchange='NSE',interval=Interval.in_1_hour,n_bars=1000)
-
-print(nifty_index_data)
-
-
-nifty_index_data.reset_index(inplace=True)
-nifty_index_data.plot(x='datetime', y='close')
-plt.show()
+print(get_live_price('SPY'))
