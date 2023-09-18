@@ -32,7 +32,6 @@ for i in range(len(data)):
     if percent_change(data['Adj Close'],i) <= -5:       #-5%
             ema_winrate=ema_winrate+1
             data['ema_winrate'].iloc[i]=20
-    # i=i+1
 
 
 print(data)
