@@ -11,4 +11,7 @@
 - [ ] Rank winrate of each technical (which technical strat has higher winrate)
 - [ ] Pull reddit/twitter sentiment and fusion data together
 - [ ] run python script on AWS EC2
-      
+
+
+Current Output:
+![Current Output](Output/Figure_1.png?raw=true)
