@@ -1,11 +1,12 @@
 
 # Ticker Analyzer
-![](https://progress-bar.dev/33/?title=Development_Progress:&width=150)
+![](https://progress-bar.dev/42/?title=Development_Progress:&width=150)
 ---------------------------------------------------
 
 ***Development List:***
 - [x] Pull real-time data from yahoo_fin
 - [x] Pull static data from yahoo_fin
+- [x] Pull static data from yfinance
 - [ ] Analyze Technicals of ticker (MACD, EMA, RSI, etc)
 - [ ] Rank winrate of each technical (which technical strat has higher winrate)
 - [ ] Pull reddit/twitter sentiment and fusion data together
