@@ -16,4 +16,4 @@
 
 
 Current Output:
-![Current Output](Output/with_ema_wins.png?raw=true)
+![Current Output](Output/Figure_3.png?raw=true)
