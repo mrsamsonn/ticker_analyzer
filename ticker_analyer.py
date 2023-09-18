@@ -18,16 +18,18 @@ data['ema200'] = ta.EMA(data["Adj Close"], 200)
 data['crossing'] = 0
 data['ema_winrate'] = 0 
 
+def percent_change(df, i):  #(new_price-old_price)/old_price *100
+     return ((df['Adj Close'].iloc[i]-df['Adj Close'].iloc[i-1])/df['Adj Close'].iloc[i-1])*100
 
 i=0
 ema_winrate=0
 while i != len(data):
     if data['ema50'].iloc[i] >= data['ema200'].iloc[i]:
         data['crossing'].iloc[i] = 10
-        if (((data['Adj Close'].iloc[i]-data['Adj Close'].iloc[i-1])/data['Adj Close'].iloc[i-1])*100) >= 5:       #(new_price-old_price)/old_price *100
+        if percent_change(data,i) >= 5:       #+5%
             ema_winrate=ema_winrate+1
             data['ema_winrate'].iloc[i]=20
-    if (((data['Adj Close'].iloc[i]-data['Adj Close'].iloc[i-1])/data['Adj Close'].iloc[i-1])*100) <= -5:       #(new_price-old_price)/old_price *100
+    if percent_change(data,i) <= -5:       #-5%
             ema_winrate=ema_winrate+1
             data['ema_winrate'].iloc[i]=20
     i=i+1
