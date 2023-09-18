@@ -21,7 +21,7 @@ data['crossing'] = 0
 i=0
 while i != len(data):
     if data['ema50'].iloc[i] >= data['ema200'].iloc[i]:
-        data['crossing'].iloc[i] = 400
+        data['crossing'].iloc[i] = 10
     i=i+1
 
 
@@ -30,8 +30,9 @@ while i != len(data):
 print(data)
 
 
-plt.plot(data.index, data['Adj Close'])
-plt.plot(data.index,data['ema50'])
-plt.plot(data.index,data['ema200'])
-plt.plot(data.index,data['crossing'])
+plt.plot(data.index, data['Adj Close'], label='Closing Price')
+plt.plot(data.index,data['ema50'], label='EMA_50')
+plt.plot(data.index,data['ema200'], label='EMA_200')
+plt.plot(data.index,data['crossing'], label='EMA_50/200_Crossing')
+plt.legend(loc="upper left")
 plt.show()
