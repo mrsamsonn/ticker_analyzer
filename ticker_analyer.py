@@ -27,6 +27,9 @@ while i != len(data):
         if (((data['Adj Close'].iloc[i]-data['Adj Close'].iloc[i-1])/data['Adj Close'].iloc[i-1])*100) >= 5:       #(new_price-old_price)/old_price *100
             ema_winrate=ema_winrate+1
             data['ema_winrate'].iloc[i]=20
+    if (((data['Adj Close'].iloc[i]-data['Adj Close'].iloc[i-1])/data['Adj Close'].iloc[i-1])*100) <= -5:       #(new_price-old_price)/old_price *100
+            ema_winrate=ema_winrate+1
+            data['ema_winrate'].iloc[i]=20
     i=i+1
 
 
@@ -37,6 +40,6 @@ plt.plot(data.index, data['Adj Close'], label='Closing Price')
 plt.plot(data.index,data['ema50'], label='EMA_50')
 plt.plot(data.index,data['ema200'], label='EMA_200')
 plt.plot(data.index,data['crossing'], label='EMA_50/200_Crossing')
-plt.plot(data.index,data['ema_winrate'], label='ema_wins +5% price change', color='cyan')
+plt.plot(data.index,data['ema_winrate'], label='ema_wins +-5% price change', color='cyan')
 plt.legend(loc="upper left")
 plt.show()
