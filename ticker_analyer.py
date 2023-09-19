@@ -44,8 +44,10 @@ data['ema_winrate'] = 0
 data['macd_winrate'] = 0
 macd_winrate = 0
 
+#EMA crossover
 ema_winrate, data['ema_winrate'] = winrate_plotter(data['Adj Close'], data['crossing'], data['ema50'], data['ema200'], data['ema_winrate'])
 
+#MACD histogram
 for i in range(len(data)):
     if data['macdhist'].iloc[i] >= 0:
         if percent_change(data['Adj Close'],i) >= 5:
@@ -57,11 +59,13 @@ for i in range(len(data)):
             data['macd_winrate'].iloc[i]=30
      
              
-
+#####Terminal Outputs
 print(data)
 print('ema_winrate:',ema_winrate ,'/',len(data),'=',round(((ema_winrate/len(data))*100),2),'%')
 print('macd_winrate:',macd_winrate ,'/',len(data),'=',round(((macd_winrate/len(data))*100),2),'%')
 
+
+#####Plots
 figure, axis = plt.subplots(2)
 
 axis[0].plot(data.index, data['Adj Close'], label='Closing Price')
@@ -74,7 +78,7 @@ axis[0].legend(loc="upper left")
 
 # axis[1].plot(data.index,data['macd'], label='macd')
 # axis[1].plot(data.index,data['macdsignal'], label='macdsignal')
-colors = ['g' if i >= 0 else 'r' for i in data['macdhist']] #for histogram color
+colors = ['g' if i >= 0 else 'r' for i in data['macdhist']] #for histogram color : red if < 0, green if > 0
 axis[1].bar(data.index, data['macdhist'], label='macdhist', color=colors)
 axis[1].legend(loc="upper left")
 plt.show()
