@@ -35,25 +35,24 @@ data['macd_winrate'] = 0
 #EMA crossover
 ema_winrate = 0
 for i in range(len(data)):
-    if data['ema50'].iloc[i] >= data['ema200'].iloc[i]:
+    if data['ema50'].iloc[i] >= data['ema200'].iloc[i] and data['ema50'].iloc[i-1] <= data['ema200'].iloc[i-1]:
         data['ema_crossing'].iloc[i] = 10
         if percent_change(data["Adj Close"],i) >= 5:       #+5%
             ema_winrate=ema_winrate+1
             data['ema_winrate'].iloc[i]=20
-    if percent_change(data["Adj Close"],i) <= -5:       #-5%
-            ema_winrate=ema_winrate+1
-            data['ema_winrate'].iloc[i]=20
+    else:
+        if percent_change(data["Adj Close"],i) <= -5:       #-5%
+                ema_winrate=ema_winrate+1
+                data['ema_winrate'].iloc[i]=20
 
 #EMA entry calc
 for i in range(len(data)):
     if data['ema_crossing'].iloc[i] == 0:
         #entry
         data['ema_entry'].iloc[i] = data['Adj Close'].iloc[i]
-    if data['ema_crossing'].iloc[i-1] == 0:
-        data['ema_entry'].iloc[i] = 0
     else:
         data['ema_close'].iloc[i] = data['Adj Close'].iloc[i]
-        data['ema_total'].iloc[i] = data['ema_close'].iloc[i] - data['ema_entry'].iloc[i] 
+        data['ema_total'].iloc[i] = data['ema_close'].iloc[i] - data['ema_entry'].iloc[i]
 
 #MACD histogram
 macd_winrate = 0
