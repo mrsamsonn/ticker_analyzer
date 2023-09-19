@@ -67,7 +67,7 @@ print('macd_winrate:',macd_winrate ,'/',len(data),'=',round(((macd_winrate/len(d
 
 #####Plots
 figure, axis = plt.subplots(2)
-
+axis[0].title.set_text('SPY500')
 axis[0].plot(data.index, data['Adj Close'], label='Closing Price')
 axis[0].plot(data.index,data['ema50'], label='EMA_50')
 axis[0].plot(data.index,data['ema200'], label='EMA_200')
@@ -81,4 +81,5 @@ axis[0].legend(loc="upper left")
 colors = ['g' if i >= 0 else 'r' for i in data['macdhist']] #for histogram color : red if < 0, green if > 0
 axis[1].bar(data.index, data['macdhist'], label='macdhist', color=colors)
 axis[1].legend(loc="upper left")
+plt.title('SPY500')
 plt.show()
