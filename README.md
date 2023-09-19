@@ -1,6 +1,6 @@
 
 # Ticker Analyzer
-![](https://progress-bar.dev/44/?title=Development_Progress:&width=150)
+![](https://progress-bar.dev/55/?title=Development_Progress:&width=150)
 ---------------------------------------------------
 
 ***Development List:***
@@ -8,7 +8,7 @@
 - [x] Pull static data from yahoo_fin
 - [x] Pull static data from yfinance
 - [x] Identify EMA and EMA crossing
-- [ ] Identify MACD and MACD crossing
+- [x] Identify MACD and MACD crossing/MACD histogram
 - [ ] Analyze Technicals of ticker (MACD, EMA, RSI, etc)
 - [ ] Rank winrate of each technical (which technical strat has higher winrate)
 - [ ] Pull reddit/twitter sentiment and fusion data together
