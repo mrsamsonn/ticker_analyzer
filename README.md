@@ -16,5 +16,5 @@
 
 
 Current Output:
-![Current Output](Output/Figure_4.png?raw=true)
+![Current Output](Output/Figure_5.png?raw=true)
 ![Terminal Output](Output/terminal_2.png?raw=true)
