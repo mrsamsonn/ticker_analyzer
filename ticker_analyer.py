@@ -91,7 +91,7 @@ colors = ['g' if i >= 0 else 'r' for i in data['macdhist']] #for histogram color
 axis[1].bar(data.index, data['macdhist'], label='macdhist', color=colors)
 axis[1].legend(loc="upper left")
 
-axis[2].plot(data.index, data['ema_total'], label='ema_total')
+axis[2].plot(data.index, data['ema_total'], label='ema_exits')
 axis[2].legend(loc="upper left")
 plt.title('SPY500')
 plt.show()
