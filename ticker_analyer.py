@@ -71,6 +71,7 @@ for i in range(len(data)):
 print(data)
 print('ema_winrate:',ema_winrate ,'/',len(data),'=',round(((ema_winrate/len(data))*100),2),'%')
 print('macd_winrate:',macd_winrate ,'/',len(data),'=',round(((macd_winrate/len(data))*100),2),'%')
+print('sum of profit using bullish ema crossover:','$',round(sum(data['ema_total']),2))
 
 
 #####Plots
