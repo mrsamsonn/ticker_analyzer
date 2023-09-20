@@ -150,3 +150,15 @@ def build_trades_data(msg: StreamMsg):
                      'price': msg.trade.price,
                      'date': msg.trade.date}, index=[msg.trade.sequence])
             ], ignore_index = False)
+        
+#run thetadata client
+client = ThetaClient(username=your_username, passwd=your_password)
+client.connect_stream(build_trades_data)
+# add specific contract to required trade stream using req_trade_stream_opt()
+root_ticker = 'AMZN'
+opt_types=["P", "C"]
+for opt_type in opt_types:
+    for expiry in mth_expirations:
+        strikes = all_strikes[expiry]
+        for strike in strikes:
+            client.req_trade_stream_opt(root_ticker, expiry.date(), strike, OptionRight.CALL if opt_type=="C" else OptionRight.PUT)
