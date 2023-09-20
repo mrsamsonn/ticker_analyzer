@@ -114,3 +114,17 @@ for opt_type in opt_types:
             # add specific contract to required trade stream using req_trade_stream_opt()
             client.req_trade_stream_opt(root_ticker, expiry.date(), strike, OptionRight.CALL if opt_type=="C" else OptionRight.PUT)
 
+#realtime panadas
+global trades_data
+trades_data = {}
+
+opt_types = ["P", "C"]
+for expiry in mth_expirations:
+    trades_data[expiry] = {}
+    strikes = all_strikes[expiry]
+    for strike in strikes:
+        trades_data[expiry][strike] = {}
+        for opt_type in opt_types:
+            trades_data[expiry][strike][opt_type] = pd.DataFrame(
+                columns = ['ms_of_day','sequence','size','condition','price','date']
+            )
