@@ -90,3 +90,27 @@ all_strikes = get_strikes(root_ticker, mth_expirations)
 
 with open('strikes.pkl', 'wb') as f:
     pickle.dump(all_strikes, f)
+
+
+with open('strikes.pkl', 'rb') as f:
+    all_strikes = pickle.load(f)
+    
+print("Option Contract: ", mth_expirations[0])
+print("AMZN Strike ", all_strikes[mth_expirations[0]][13])
+
+######################
+#REAL TIME
+######################
+
+client = ThetaClient(username=your_username, passwd=your_password)
+client.connect_stream(callback)
+
+root_ticker = 'AMZN'
+opt_types=["P", "C"]
+for opt_type in opt_types:
+    for expiry in mth_expirations:
+        strikes = all_strikes[expiry]
+        for strike in strikes:
+            # add specific contract to required trade stream using req_trade_stream_opt()
+            client.req_trade_stream_opt(root_ticker, expiry.date(), strike, OptionRight.CALL if opt_type=="C" else OptionRight.PUT)
+
