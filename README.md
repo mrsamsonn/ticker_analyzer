@@ -23,5 +23,5 @@ Current Output:
 CHoCH pivot point Output:
 ![CHoCH Output](Output/choch.png?raw=true)
 
-CHoCH pivot point CLOSE UP Output:
+CHoCH pivot point close up Output:
 ![CHoCH_Closeup Output](Output/choch_closeup.png?raw=true)
