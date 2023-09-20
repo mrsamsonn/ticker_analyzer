@@ -48,3 +48,45 @@ def get_expirations(root_ticker) -> pd.DataFrame:
 root_ticker = 'AMZN'
 expirations = get_expirations(root_ticker)
 expirations
+
+trading_days = pd.date_range(start=datetime(2023,1,24),end=datetime(2024,12,31),freq='B')
+# The third friday in every month
+contracts = pd.date_range(start=datetime(2023,1,24),end=datetime(2024,12,31),freq='WOM-3FRI')
+# Find contract expiries that match with ThetaData expiries 
+mth_expirations = [exp for exp in expirations if exp in contracts]
+# Convert from python list to pandas datetime
+mth_expirations = pd.to_datetime(pd.Series(mth_expirations))
+
+mth_expirations
+
+
+def get_strikes(root_ticker, expiration_dates) -> pd.DataFrame:
+    """Request strikes from a particular option contract"""
+    # Create a ThetaClient
+    client = ThetaClient(username=your_username, passwd=your_password, jvm_mem=4, timeout=15)
+    
+    all_strikes = {}
+
+    # Connect to the Terminal
+    with client.connect():
+        
+        for exp_date in expiration_dates:
+        
+            # Make the request
+            data = client.get_strikes(
+                root=root_ticker,
+                exp=exp_date
+            )
+            
+            all_strikes[exp_date] = pd.to_numeric(data)
+            
+
+    return all_strikes
+
+
+root_ticker = 'AMZN'
+
+all_strikes = get_strikes(root_ticker, mth_expirations)
+
+with open('strikes.pkl', 'wb') as f:
+    pickle.dump(all_strikes, f)
