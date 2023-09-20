@@ -22,3 +22,29 @@ def callback(msg: StreamMsg):
         print('con:                         ' + msg.contract.to_string())
         print('trade:                       ' + msg.trade.to_string())
         print('last quote at time of trade: ' + msg.quote.to_string())
+
+client = ThetaClient(username=your_username, passwd=your_password)
+client.connect_stream(callback)
+client.req_full_trade_stream_opt()  # Subscribes to every option trade.
+
+client.remove_full_trade_stream_opt()  # Unsubscribes from the full option trade stream.
+client.close_stream()
+
+def get_expirations(root_ticker) -> pd.DataFrame:
+    """Request expirations from a particular options root"""
+    # Create a ThetaClient
+    client = ThetaClient(username=your_username, passwd=your_password, jvm_mem=4, timeout=15)
+
+    # Connect to the Terminal
+    with client.connect():
+
+        # Make the request
+        data = client.get_expirations(
+            root=root_ticker,
+        )
+
+    return data
+
+root_ticker = 'AMZN'
+expirations = get_expirations(root_ticker)
+expirations
