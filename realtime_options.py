@@ -128,3 +128,25 @@ for expiry in mth_expirations:
             trades_data[expiry][strike][opt_type] = pd.DataFrame(
                 columns = ['ms_of_day','sequence','size','condition','price','date']
             )
+
+#callback func for pandas df
+def build_trades_data(msg: StreamMsg):
+    msg.type = msg.type
+
+    if msg.type == StreamMsgType.TRADE:
+        print('---------------------------------------------------------------------------')
+        print('trade:                       ' + msg.trade.to_string())
+        # Set up expiry, strike and opt_type for easy reference in dataframe
+        expiry = datetime(msg.contract.exp.year, msg.contract.exp.month, msg.contract.exp.day)
+        strike = msg.contract.strike
+        opt_type = "C" if msg.contract.isCall else "P"
+        
+        trades_data[expiry][strike][opt_type] = pd.concat([
+            trades_data[expiry][strike][opt_type],
+                    pd.DataFrame({'ms_of_day': msg.trade.ms_of_day,
+                     'sequence': msg.trade.sequence,
+                     'size': msg.trade.size,
+                     'condition': str(msg.trade.condition).replace('TradeCondition.', ''),
+                     'price': msg.trade.price,
+                     'date': msg.trade.date}, index=[msg.trade.sequence])
+            ], ignore_index = False)
